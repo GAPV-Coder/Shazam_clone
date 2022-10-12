@@ -1,7 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Error, Loader } from "../components";
+import { Error, Loader, DetailsHeader, RelatedSongs } from "../components";
+import { setActiveSong, playPause } from "../redux/features/playerSlice";
 import {
 	useGetSongDetailsQuery,
 	useGetSongRelatedQuery
@@ -29,8 +30,18 @@ const SongDetails = () => {
 
 	if (error) return <Error />;
 
+	const handlePauseClick = () => {
+		dispatch(playPause(false));
+	};
+
+	const handlePlayClick = (song, i) => {
+		dispatch(setActiveSong({ song, data, i }));
+		dispatch(playPause(true));
+	};
+
 	return (
 		<div className="flex flex-col">
+			<DetailsHeader artistId={artistId} songData={songData} />
 			<div className="mb-10">
 				<h2 className="text-white text-3xl font-bold">Lyrics:</h2>
 
@@ -51,6 +62,14 @@ const SongDetails = () => {
 					)}
 				</div>
 			</div>
+			<RelatedSongs
+				data={data}
+				artistId={artistId}
+				isPlaying={isPlaying}
+				activeSong={activeSong}
+				handlePauseClick={handlePauseClick}
+				handlePlayClick={handlePlayClick}
+			/>
 		</div>
 	);
 };

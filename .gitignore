@@ -15,6 +15,7 @@ dist-ssr
 *.local
 .eslintrc.js
 keyRapidAPI.js
+IP_API_key.js
 
 # Editor directories and files
 .vscode/*

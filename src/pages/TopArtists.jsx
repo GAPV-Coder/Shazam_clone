@@ -1,5 +1,5 @@
 import React from "react";
-import { Error, Loader } from "../components";
+import { Error, Loader, ArtistCard } from "../components";
 import { useGetTopChartsQuery } from "../redux/services/shazamCore";
 
 const TopArtists = () => {
